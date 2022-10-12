@@ -1,0 +1,29 @@
+const User = require('../models/User');
+
+const getAllUser = async (req, res) => {
+    try {
+        const user = await User.find();
+
+        return res.status(200).json(user);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
+const deleteUser = async (req, res) => {
+    try {
+        // await User.findByIdAndDelete(req.params.id);
+        const user = await User.findById(req.params.id);
+        return res.status(200).json({
+            message: 'User deleted',
+            data: user
+        })
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
+module.exports = {
+    getAllUser,
+    deleteUser
+}
